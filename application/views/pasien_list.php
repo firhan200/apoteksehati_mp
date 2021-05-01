@@ -30,7 +30,12 @@ if(count($pasien_list) > 0){
                     ? ((date("Y") - $birthDate[2]) - 1)
                     : (date("Y") - $birthDate[2]));
 
-                echo '<tr>';
+                if($pasien['tanggal_meninggal'] != null && $pasien['tanggal_meninggal'] != ""){
+                    echo '<tr style="background-color:#FADBD8;">';
+                }else{
+                    echo '<tr>';
+
+                }
                 echo '<td>'.$pasien['no_rm'].'</td>';
                 echo '<td><a href="'.site_url('/pasien/riwayat/'.$pasien['id']).'">'.$pasien['nama'].'</a></td>';
                 echo '<td>'.$age.' Tahun</td>';

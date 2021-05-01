@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2021 at 04:58 PM
+-- Generation Time: May 01, 2021 at 08:00 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -180,19 +180,22 @@ CREATE TABLE `pasien` (
   `jenis_kelamin` smallint(1) NOT NULL COMMENT '0 = Pria, 1 = Wanita',
   `tanggal_lahir` varchar(50) NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `faktor_resiko_cad` varchar(255) NOT NULL
+  `faktor_resiko_cad` varchar(255) NOT NULL,
+  `ekg` varchar(50) NOT NULL,
+  `tanggal_meninggal` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`id`, `nama`, `no_rm`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `faktor_resiko_cad`) VALUES
-(8, 'John Doe', 'RM-0001', 0, '10-07-1997', 'Cirebon Kota', 'Hipertensi'),
-(9, 'Lucy Ceil', 'RM-0008', 1, '05-01-2000', 'Majalengka Barat', 'Family History'),
-(10, 'Sheila Mary', 'RM-0009', 1, '04-10-1994', 'Cirebon Kabupaten', 'Dislipidemia'),
-(11, 'Ken Dock', 'RM-0010', 0, '06-11-1986', 'Kuningan', 'Merokok'),
-(12, 'Alex', 'RM-0011', 0, '10-03-1995', 'Indramayu Barat', 'DM');
+INSERT INTO `pasien` (`id`, `nama`, `no_rm`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `faktor_resiko_cad`, `ekg`, `tanggal_meninggal`) VALUES
+(8, 'John Doe', 'RM-0001', 0, '10-07-1997', 'Cirebon Kota', 'Hipertensi', '', ''),
+(9, 'Lucy Ceil', 'RM-0008', 1, '05-01-2000', 'Majalengka Barat', 'Family History', '', ''),
+(10, 'Sheila Mary', 'RM-0009', 1, '04-10-1994', 'Cirebon Kabupaten', 'Dislipidemia', '', ''),
+(11, 'Ken Dock', 'RM-0010', 0, '06-11-1986', 'Kuningan', 'Merokok', '', ''),
+(12, 'Alex', 'RM-0011', 0, '10-03-1995', 'Indramayu Barat', 'DM', '', ''),
+(14, 'Test Pasien', 'RM-0012', 0, '02-03-1988', 'Cirebon Kota', 'Hipertensi', 'AF/FLUTTER', '03-05-2021');
 
 -- --------------------------------------------------------
 
@@ -408,31 +411,31 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `pasien_echo`
 --
 ALTER TABLE `pasien_echo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `pasien_laboratorium`
 --
 ALTER TABLE `pasien_laboratorium`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pasien_obat`
 --
 ALTER TABLE `pasien_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pasien_riwayat`
 --
 ALTER TABLE `pasien_riwayat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user`

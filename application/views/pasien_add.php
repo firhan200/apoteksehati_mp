@@ -29,7 +29,14 @@
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
                 <label class="form-label">Alamat Pasien</label>
-                <textarea name="alamat" class="form-control" maxlength="250" placeholder="Alamat Pasien.." required></textarea>
+                <select class="form-control" name="alamat">
+                    <option value="<?php echo ALAMAT_CIREBON_KOTA ?>"><?php echo ALAMAT_CIREBON_KOTA; ?></option>
+                    <option value="<?php echo ALAMAT_CIREBON_KAB ?>"><?php echo ALAMAT_CIREBON_KAB; ?></option>
+                    <option value="<?php echo ALAMAT_INDRAMAYU ?>"><?php echo ALAMAT_INDRAMAYU; ?></option>
+                    <option value="<?php echo ALAMAT_KUNINGAN ?>"><?php echo ALAMAT_KUNINGAN; ?></option>
+                    <option value="<?php echo ALAMAT_MAJALENGKA ?>"><?php echo ALAMAT_MAJALENGKA; ?></option>
+                    <option value="<?php echo ALAMAT_LUAR_WILAYAH ?>"><?php echo ALAMAT_LUAR_WILAYAH; ?></option>
+                </select>
             </div>
             <div class="form-group">
                 <label class="form-label">Faktor Resiko CAD</label>
@@ -39,6 +46,13 @@
                     <option value="<?php echo CAD_MEROKOK ?>">Merokok</option>
                     <option value="<?php echo CAD_DISLIPIDEMIA ?>">Dislipidemia</option>
                     <option value="<?php echo CAD_FAMILY_HISTORY ?>">Family History</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">EKG</label>
+                <select class="form-control" name="ekg">
+                    <option value="<?php echo EKG_SINUS ?>"><?php echo EKG_SINUS; ?></option>
+                    <option value="<?php echo EKG_AF_FLUTTER ?>"><?php echo EKG_AF_FLUTTER; ?></option>
                 </select>
             </div>
         </div>

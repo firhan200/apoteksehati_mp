@@ -29,7 +29,14 @@
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
                 <label class="form-label">Alamat Pasien</label>
-                <textarea name="alamat" class="form-control" maxlength="250" placeholder="Alamat Pasien.." required><?php echo $pasien['alamat']; ?></textarea>
+                <select class="form-control" name="alamat">
+                    <option value="<?php echo ALAMAT_CIREBON_KOTA ?>" <?php echo $pasien['alamat']==ALAMAT_CIREBON_KOTA ? 'selected' : '' ?>><?php echo ALAMAT_CIREBON_KOTA; ?></option>
+                    <option value="<?php echo ALAMAT_CIREBON_KAB ?>" <?php echo $pasien['alamat']==ALAMAT_CIREBON_KAB ? 'selected' : '' ?>><?php echo ALAMAT_CIREBON_KAB; ?></option>
+                    <option value="<?php echo ALAMAT_INDRAMAYU ?>" <?php echo $pasien['alamat']==ALAMAT_INDRAMAYU ? 'selected' : '' ?>><?php echo ALAMAT_INDRAMAYU; ?></option>
+                    <option value="<?php echo ALAMAT_KUNINGAN ?>" <?php echo $pasien['alamat']==ALAMAT_KUNINGAN ? 'selected' : '' ?>><?php echo ALAMAT_KUNINGAN; ?></option>
+                    <option value="<?php echo ALAMAT_MAJALENGKA ?>" <?php echo $pasien['alamat']==ALAMAT_MAJALENGKA ? 'selected' : '' ?>><?php echo ALAMAT_MAJALENGKA; ?></option>
+                    <option value="<?php echo ALAMAT_LUAR_WILAYAH ?>" <?php echo $pasien['alamat']==ALAMAT_LUAR_WILAYAH ? 'selected' : '' ?>><?php echo ALAMAT_LUAR_WILAYAH; ?></option>
+                </select>
             </div>
             <div class="form-group">
                 <label class="form-label">Faktor Resiko CAD</label>
@@ -39,6 +46,13 @@
                     <option value="<?php echo CAD_MEROKOK ?>" <?php echo $pasien['faktor_resiko_cad']==CAD_MEROKOK ? 'selected' : '' ?>>Merokok</option>
                     <option value="<?php echo CAD_DISLIPIDEMIA ?>" <?php echo $pasien['faktor_resiko_cad']==CAD_DISLIPIDEMIA ? 'selected' : '' ?>>Dislipidemia</option>
                     <option value="<?php echo CAD_FAMILY_HISTORY ?>" <?php echo $pasien['faktor_resiko_cad']==CAD_FAMILY_HISTORY ? 'selected' : '' ?>>Family History</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label">EKG</label>
+                <select class="form-control" name="ekg">
+                    <option value="<?php echo EKG_SINUS ?>" <?php echo $pasien['ekg']==EKG_SINUS ? 'selected' : '' ?>><?php echo EKG_SINUS; ?></option>
+                    <option value="<?php echo EKG_AF_FLUTTER ?>" <?php echo $pasien['ekg']==EKG_AF_FLUTTER ? 'selected' : '' ?>><?php echo EKG_AF_FLUTTER; ?></option>
                 </select>
             </div>
         </div>

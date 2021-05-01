@@ -1,4 +1,12 @@
+<?php if($pasien['tanggal_meninggal'] != null && $pasien['tanggal_meninggal'] != ""){ ?>
+<div class="alert alert-danger">
+    Pasien Telah Meninggal
+</div>
+<?php } ?>
 <div class="text-end">
+    <?php if($pasien['tanggal_meninggal'] == null || $pasien['tanggal_meninggal'] == ""){ ?>
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#meninggalModal">Meninggal</button>
+    <?php } ?>
     <a href="<?php echo site_url('/riwayat/unduh/'.$pasien['id']); ?>" class="btn btn-success">Unduh Excel</a>
 </div>
 <br/>
@@ -79,6 +87,16 @@
                 </div>
                 <div class="value">
                     <?php echo $pasien['alamat']; ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-2">
+            <div class="show_data">
+                <div class="key">
+                    EKG
+                </div>
+                <div class="value">
+                    <?php echo $pasien['ekg']; ?>
                 </div>
             </div>
         </div>
@@ -308,6 +326,29 @@
     </div>
 </div>
 
+<div class="modal fade" id="meninggalModal" tabindex="-1" role="dialog" aria-labelledby="meninggalModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Pasien Meninggal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="<?php echo site_url('/riwayat/meninggal/'.$pasien['id']); ?>">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Tanggal Meninggal</label>
+                        <input type="text" name="tanggal_meninggal" class="form-control" autocomplete="off" maxlength="150" placeholder="Tanggal Pasien Meninggal" data-toggle="datepicker" required/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- riwayat modal -->
 <div class="modal fade" id="addRiwayatModal" tabindex="-1" role="dialog" aria-labelledby="addRiwayatModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -328,7 +369,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -355,7 +396,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -393,7 +434,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -429,7 +470,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -504,7 +545,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -577,7 +618,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -621,7 +662,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
@@ -663,7 +704,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>

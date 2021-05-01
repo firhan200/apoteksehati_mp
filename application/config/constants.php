@@ -88,8 +88,18 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('LAKI_LAKI', 0);
 define('PEREMPUAN', 1);
 
+define('EKG_SINUS', 'SINUS');
+define('EKG_AF_FLUTTER', 'AF/FLUTTER');
+
 define('CAD_HIPERTENSI', 'Hipertensi');
 define('CAD_DM', 'DM');
 define('CAD_MEROKOK', 'Merokok');
 define('CAD_DISLIPIDEMIA', 'Dislipidemia');
 define('CAD_FAMILY_HISTORY', 'Family History');
+
+define('ALAMAT_CIREBON_KOTA', 'Cirebon Kota');
+define('ALAMAT_CIREBON_KAB', 'Cirebon Kab');
+define('ALAMAT_INDRAMAYU', 'Indramayu');
+define('ALAMAT_KUNINGAN', 'Kuningan');
+define('ALAMAT_MAJALENGKA', 'Majalengka');
+define('ALAMAT_LUAR_WILAYAH', 'Luar Wilayah 3 Cirebon');

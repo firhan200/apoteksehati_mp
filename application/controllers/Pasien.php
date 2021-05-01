@@ -63,6 +63,7 @@ class Pasien extends MY_Controller {
 		$tanggal_lahir = $this->input->post('tanggal_lahir');
 		$alamat = $this->input->post('alamat');
 		$faktor_resiko_cad = $this->input->post('faktor_resiko_cad');
+		$ekg = $this->input->post('ekg');
 
 		//generate no RM
 		$last_pasien = $this->db->query('SELECT id FROM pasien ORDER BY id DESC LIMIT 1')->row_array();
@@ -79,7 +80,8 @@ class Pasien extends MY_Controller {
 			'jenis_kelamin' => $jenis_kelamin,
 			'tanggal_lahir' => $tanggal_lahir,
 			'alamat' => $alamat,
-			'faktor_resiko_cad' => $faktor_resiko_cad
+			'faktor_resiko_cad' => $faktor_resiko_cad,
+			'ekg' => $ekg
 		));
 
 		$this->session->set_flashdata('success_msg', 'Sukses menambahkan data pasien.');
@@ -115,6 +117,7 @@ class Pasien extends MY_Controller {
 		$tanggal_lahir = $this->input->post('tanggal_lahir');
 		$alamat = $this->input->post('alamat');
 		$faktor_resiko_cad = $this->input->post('faktor_resiko_cad');
+		$ekg = $this->input->post('ekg');
 
 		//insert
 		$this->db->where('id', $id);
@@ -123,7 +126,8 @@ class Pasien extends MY_Controller {
 			'jenis_kelamin' => $jenis_kelamin,
 			'tanggal_lahir' => $tanggal_lahir,
 			'alamat' => $alamat,
-			'faktor_resiko_cad' => $faktor_resiko_cad
+			'faktor_resiko_cad' => $faktor_resiko_cad,
+			'ekg' => $ekg
 		));
 
 		$this->session->set_flashdata('success_msg', 'Sukses mengubah data pasien: '.$data['pasien']['nama'].'.');

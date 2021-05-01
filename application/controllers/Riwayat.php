@@ -9,6 +9,26 @@ class Riwayat extends MY_Controller {
 		parent::__construct();
 	}
 
+	public function meninggal($pasien_id){
+		//validasi pasien
+		$pasien = $this->db->query('SELECT * FROM pasien WHERE id='.$pasien_id)->row_array();
+		if($pasien==null){
+			$this->session->set_flashdata('error_msg', 'Pasien tidak ditemukan');
+			redirect(site_url('/pasien'));
+		}
+
+		$tanggal_meninggal = $this->input->post('tanggal_meninggal');
+
+		$this->db->where('id', $pasien_id);
+		$this->db->update('pasien', array(
+			'tanggal_meninggal' => $tanggal_meninggal,
+		));
+
+		$this->session->set_flashdata('success_msg', 'Pasien di identifikasikan meninggal');
+
+		redirect(site_url('/pasien/history/'.$pasien_id));
+	}
+
 	public function add_process($pasien_id){
 		//validasi pasien
 		$pasien = $this->db->query('SELECT * FROM pasien WHERE id='.$pasien_id)->row_array();
@@ -314,6 +334,9 @@ class Riwayat extends MY_Controller {
 		$sheet->setCellValue('A9', 'FAKTOR RESIKO CAD');
 		$sheet->setCellValue('B9', $pasien['faktor_resiko_cad']);
 
+		$sheet->setCellValue('A11', 'EKG');
+		$sheet->setCellValue('B11', $pasien['ekg']);
+
 		//get riwayat
 		$data['riwayat_list'] = $this->db->query('SELECT * FROM pasien_riwayat WHERE pasien_id='.$pasien_id.' ORDER BY id DESC')->result_array();
 		$data['lab_list'] = $this->db->query('SELECT pasien_laboratorium.*, laboratorium.jenis_lab FROM pasien_laboratorium LEFT JOIN laboratorium ON laboratorium.id=pasien_laboratorium.laboratorium_id WHERE pasien_id='.$pasien_id.' ORDER BY laboratorium.id DESC')->result_array();
@@ -325,11 +348,11 @@ class Riwayat extends MY_Controller {
 		WHERE po.pasien_id='.$pasien_id.'')->result_array();
 
 		/* RIWAYAT */
-		$sheet->setCellValue('A11', 'RIWAYAT');
-		$sheet->setCellValue('A12', 'Tanggal Masuk');
-		$sheet->setCellValue('B12', 'Alasan Dirawat');
+		$sheet->setCellValue('A13', 'RIWAYAT');
+		$sheet->setCellValue('A14', 'Tanggal Masuk');
+		$sheet->setCellValue('B14', 'Alasan Dirawat');
 
-		$riwayatCounter = 13;
+		$riwayatCounter = 15;
 		foreach($data['riwayat_list'] as $riwayat){
 			$sheet->setCellValue('A'.$riwayatCounter, $riwayat['tanggal_masuk']);
 			$sheet->setCellValue('B'.$riwayatCounter, $riwayat['alasan_dirawat']);
@@ -416,6 +439,12 @@ class Riwayat extends MY_Controller {
 		}
 		/* OBAT */
 
+		$obatCounter++;
+
+		$sheet->setCellValue('A'.$obatCounter, 'Meninggal');
+		$sheet->setCellValue('B'.$obatCounter, $pasien['tanggal_meninggal']);
+		$spreadsheet->getActiveSheet()->getStyle('A'.$obatCounter)->applyFromArray($styleArray);
+
 		$spreadsheet->getActiveSheet()->getStyle('A2')->applyFromArray($styleArray);
 		$spreadsheet->getActiveSheet()->getStyle('A3')->applyFromArray($styleArray);
 		$spreadsheet->getActiveSheet()->getStyle('A4')->applyFromArray($styleArray);
@@ -423,8 +452,9 @@ class Riwayat extends MY_Controller {
 		$spreadsheet->getActiveSheet()->getStyle('A6')->applyFromArray($styleArray);
 		$spreadsheet->getActiveSheet()->getStyle('A7')->applyFromArray($styleArray);
 		$spreadsheet->getActiveSheet()->getStyle('A9')->applyFromArray($styleArray);
-		$spreadsheet->getActiveSheet()->getStyle('A12')->applyFromArray($styleArray);
-		$spreadsheet->getActiveSheet()->getStyle('B12')->applyFromArray($styleArray);
+		$spreadsheet->getActiveSheet()->getStyle('A11')->applyFromArray($styleArray);
+		$spreadsheet->getActiveSheet()->getStyle('A14')->applyFromArray($styleArray);
+		$spreadsheet->getActiveSheet()->getStyle('B14')->applyFromArray($styleArray);
 		$spreadsheet->getActiveSheet()->getColumnDimension('A')->setAutoSize(true);
 		$spreadsheet->getActiveSheet()->getColumnDimension('B')->setAutoSize(true);
 		$spreadsheet->getActiveSheet()->getColumnDimension('C')->setAutoSize(true);
