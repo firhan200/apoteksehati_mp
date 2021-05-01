@@ -1,5 +1,5 @@
 <div class="text-end">
-    <a href="#" class="btn btn-success">Unduh Excel</a>
+    <a href="<?php echo site_url('/riwayat/unduh/'.$pasien['id']); ?>" class="btn btn-success">Unduh Excel</a>
 </div>
 <br/>
 <div class="box">
