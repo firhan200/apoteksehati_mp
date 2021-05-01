@@ -270,4 +270,13 @@ class Riwayat extends MY_Controller {
 
 		redirect(site_url('/pasien/history/'.$pasien_obat['pasien_id']));
 	}
+
+	public function unduh($pasien_id){
+		//validasi
+		$pasien = $this->db->query('SELECT * FROM pasien WHERE id='.$pasien_id)->row_array();
+		if($pasien==null){
+			$this->session->set_flashdata('error_msg', 'Pasien tidak ditemukan');
+			redirect(site_url('/pasien'));
+		}
+	}
 }
