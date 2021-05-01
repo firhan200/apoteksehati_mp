@@ -208,4 +208,66 @@ class Riwayat extends MY_Controller {
 
 		redirect(site_url('/pasien/history/'.$pasien_echo['pasien_id']));
 	}
+
+	public function add_obat_process($pasien_id){
+		//validasi pasien
+		$pasien = $this->db->query('SELECT * FROM pasien WHERE id='.$pasien_id)->row_array();
+		if($pasien==null){
+			$this->session->set_flashdata('error_msg', 'Pasien tidak ditemukan');
+			redirect(site_url('/pasien'));
+		}
+
+		$dosis_obat_id = $this->input->post('dosis_obat_id');
+		$tanggal_diberikan = $this->input->post('tanggal_diberikan');
+
+		$this->db->insert('pasien_obat', array(
+			'pasien_id' => $pasien_id,
+			'dosis_obat_id' => $dosis_obat_id,
+			'tanggal_diberikan' => $tanggal_diberikan,
+			'created_at' => date('Y-m-d H:i:s', time() + 3600 * 5),
+			'updated_at' => date('Y-m-d H:i:s', time() + 3600 * 5),
+		));
+
+		$this->session->set_flashdata('success_msg', 'Berhasil menambahkan riwayat obat pasien');
+
+		redirect(site_url('/pasien/history/'.$pasien_id));
+	}
+
+	public function edit_obat_process($id){
+		//validasi
+		$pasien_obat = $this->db->query('SELECT * FROM pasien_obat WHERE id='.$id)->row_array();
+		if($pasien_obat==null){
+			$this->session->set_flashdata('error_msg', 'Pasien tidak ditemukan');
+			redirect(site_url('/pasien'));
+		}
+
+		$tanggal_diberikan = $this->input->post('tanggal_diberikan');
+		$dosis_obat_id = $this->input->post('dosis_obat_id');
+
+		$this->db->where('id', $id);
+		$this->db->update('pasien_obat', array(
+			'tanggal_diberikan' => $tanggal_diberikan,
+			'dosis_obat_id' => $dosis_obat_id,
+			'updated_at' => date('Y-m-d H:i:s', time() + 3600 * 5),
+		));
+
+		$this->session->set_flashdata('success_msg', 'Berhasil mengubah riwayat obat pasien');
+
+		redirect(site_url('/pasien/history/'.$pasien_obat['pasien_id']));
+	}
+
+	public function delete_obat($id){
+		//validasi
+		$pasien_obat = $this->db->query('SELECT * FROM pasien_obat WHERE id='.$id)->row_array();
+		if($pasien_obat==null){
+			$this->session->set_flashdata('error_msg', 'Pasien tidak ditemukan');
+			redirect(site_url('/pasien'));
+		}
+
+		$this->db->query('DELETE FROM pasien_obat WHERE id='.$id);
+
+		$this->session->set_flashdata('success_msg', 'Berhasil menghapus riwayat obat pasien');
+
+		redirect(site_url('/pasien/history/'.$pasien_obat['pasien_id']));
+	}
 }

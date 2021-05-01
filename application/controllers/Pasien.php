@@ -25,13 +25,24 @@ class Pasien extends MY_Controller {
 			redirect(site_url('/pasien'));
 		}
 
+		$data['menu_pasien'] = true;
+
 		//get riwayat
 		$data['riwayat_list'] = $this->db->query('SELECT * FROM pasien_riwayat WHERE pasien_id='.$id.' ORDER BY id DESC')->result_array();
 		$data['lab_list'] = $this->db->query('SELECT pasien_laboratorium.*, laboratorium.jenis_lab FROM pasien_laboratorium LEFT JOIN laboratorium ON laboratorium.id=pasien_laboratorium.laboratorium_id WHERE pasien_id='.$id.' ORDER BY laboratorium.id DESC')->result_array();
 		$data['echo_list'] = $this->db->query('SELECT * FROM pasien_echo WHERE pasien_id='.$id.' ORDER BY id DESC')->result_array();
+		$data['obat_list'] = $this->db->query('SELECT *, po.id AS main_id FROM pasien_obat po
+		LEFT JOIN dosis_obat do ON po.dosis_obat_id=do.id 
+		LEFT JOIN obat o ON do.obat_id=o.id
+		LEFT JOIN kategori_obat ko ON o.kategori_obat_id=ko.id
+		WHERE po.pasien_id='.$id.'')->result_array();
 
 		//lab data
 		$data['master_lab'] = $this->db->query('SELECT * FROM laboratorium ORDER BY jenis_lab ASC')->result_array();
+		//obat data
+		$data['master_kategori_obat'] = $this->db->query('SELECT * FROM kategori_obat ORDER BY nama_kategori ASC')->result_array();
+		$data['master_obat'] = $this->db->query('SELECT * FROM obat ORDER BY nama_obat ASC')->result_array();
+		$data['master_dosis_obat'] = $this->db->query('SELECT * FROM dosis_obat ORDER BY dosis ASC')->result_array();
 
 		$this->load->view('layouts/header', $data);
 		$this->load->view('pasien_history.php');

@@ -248,6 +248,62 @@
     </div>
 </div>
 
+<br/>
+<div class="row">
+    <div class="col-sm-12 col-md-8">
+        <div class="box">
+            <div class="row">
+                <div class="col-sm-12">
+                    <b>Riwayat Obat Pasien</b>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#addObatModal">
+                        + Obat
+                    </button>
+                    <br/>
+                </div>
+            </div>
+            <?php if(count($obat_list) > 0){ ?>
+                <br/>
+                <table class="my_table">
+                    <thead>
+                        <th>Tanggal Diberikan</th>
+                        <th>Kategori Obat</th>
+                        <th>Nama Obat</th>
+                        <th>Dosis Obat</th>
+                        <th></th>
+                    </thead>
+                    <tbody>
+                    <?php foreach($obat_list as $obat){ ?>
+                    <tr>
+                        <td><?php echo $obat['tanggal_diberikan'] ?></td>
+                        <td><?php echo $obat['nama_kategori'] ?></td>
+                        <td><?php echo $obat['nama_obat'] ?></td>
+                        <td><?php echo $obat['dosis'] ?></td>
+                        <td>
+                            <a href="#" class="btn btn-sm btn-light ubah-riwayat-obat" 
+                                data-tanggal-diberikan="<?php echo $obat['tanggal_diberikan'] ?>"
+                                data-dosis-obat-id="<?php echo $obat['dosis_obat_id'] ?>"
+                                data-bs-toggle="modal" 
+                                data-bs-target="#ubahObatModal" 
+                                data-id="<?php echo $obat['main_id'] ?>">Ubah</a>
+                            <a href="<?php echo site_url('/riwayat/delete_obat/'.$obat['main_id']); ?>" onclick="return confirm('Hapus obat <?php echo htmlspecialchars($obat['nama_obat'].' - '.$obat['dosis']); ?>?')" class="btn btn-sm btn-danger">Hapus</a>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+            <?php }else{ ?>
+            <div class="text-center">
+                <img src="<?php echo base_url('/assets/images/medical.png'); ?>" width="200px"/>
+                <div class="help">
+                    Tidak ada riwayat obat
+                </div>
+            </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>
+
 <!-- riwayat modal -->
 <div class="modal fade" id="addRiwayatModal" tabindex="-1" role="dialog" aria-labelledby="addRiwayatModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -525,3 +581,89 @@
     </div>
 </div>
 <!-- echo modal -->
+
+<!-- obat modal -->
+<div class="modal fade" id="addObatModal" tabindex="-1" role="dialog" aria-labelledby="addObatModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Obat</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="<?php echo site_url('/riwayat/add_obat_process/'.$pasien['id']); ?>">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Obat</label>
+                        <select name="dosis_obat_id" class="form-control">
+                            <?php foreach($master_kategori_obat as $kategori_obat){
+                                $obatOptions = '';
+                                foreach($master_obat as $obat){
+                                    if($obat['kategori_obat_id']==$kategori_obat['id']){
+                                        foreach($master_dosis_obat as $dosis_obat){
+                                            if($dosis_obat['obat_id']==$obat['id']){
+                                                $obatOptions .= '<option value="'.$dosis_obat['id'].'">'.$obat['nama_obat'].' - '.$dosis_obat['dosis'].'</option>';
+                                            }
+                                        }
+                                    }
+                                }
+
+                                echo '<optgroup label="'.$kategori_obat['nama_kategori'].'">'.$obatOptions.'</optgroup>';
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Diberikan</label>
+                        <input type="text" name="tanggal_diberikan" class="form-control" autocomplete="off" maxlength="150" placeholder="Tanggal Lab Pasien.." data-toggle="datepicker" required/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ubahObatModal" tabindex="-1" role="dialog" aria-labelledby="ubahObatModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Obat</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="edit_riwayat_obat_form" method="post" action="<?php echo site_url('/riwayat/edit_obat_process/{id}'); ?>">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Obat</label>
+                        <select name="dosis_obat_id" class="form-control dosis_obat_id">
+                            <?php foreach($master_kategori_obat as $kategori_obat){
+                                $obatOptions = '';
+                                foreach($master_obat as $obat){
+                                    if($obat['kategori_obat_id']==$kategori_obat['id']){
+                                        foreach($master_dosis_obat as $dosis_obat){
+                                            if($dosis_obat['obat_id']==$obat['id']){
+                                                $obatOptions .= '<option value="'.$dosis_obat['id'].'">'.$obat['nama_obat'].' - '.$dosis_obat['dosis'].'</option>';
+                                            }
+                                        }
+                                    }
+                                }
+
+                                echo '<optgroup label="'.$kategori_obat['nama_kategori'].'">'.$obatOptions.'</optgroup>';
+                            } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Diberikan</label>
+                        <input type="text" name="tanggal_diberikan" class="form-control tanggal_diberikan" autocomplete="off" maxlength="150" placeholder="Tanggal Lab Pasien.." data-toggle="datepicker" required/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- obat modal -->

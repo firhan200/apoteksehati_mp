@@ -32,6 +32,12 @@
                             
                             <button type="submit" class="btn btn-primary full" style="margin-top:10px">Masuk</button>
                         </form>
+                        <hr/>
+                        <div class="text-center">
+                            <div class="help">
+                                Sistem Manajemen Pasien - Apotek Sehati 2021 &copy;
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -51,4 +51,16 @@ $(document).ready(function(){
         form.find('.masalah_katup').val(masalah_katup);
         form.find('.hipertensi_plumonal').val(hipertensi_plumonal);
     })
+
+    $(".ubah-riwayat-obat").click(function(){
+        var form = $("#edit_riwayat_obat_form");
+        var id = $(this).data('id');
+        var originUrl = form.attr('action');
+        var tanggal_diberikan = $(this).data('tanggal-diberikan');
+        var dosis_obat_id = $(this).data('dosis-obat-id');
+
+        form.attr('action', originUrl.replace('{id}', id));
+        form.find('.tanggal_diberikan').val(tanggal_diberikan);
+        form.find('.dosis_obat_id').val(dosis_obat_id);
+    })
 })
