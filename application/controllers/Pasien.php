@@ -27,7 +27,8 @@ class Pasien extends MY_Controller {
 
 		//get riwayat
 		$data['riwayat_list'] = $this->db->query('SELECT * FROM pasien_riwayat WHERE pasien_id='.$id.' ORDER BY id DESC')->result_array();
-		$data['lab_list'] = $this->db->query('SELECT * FROM pasien_laboratorium LEFT JOIN laboratorium ON laboratorium.id=pasien_laboratorium.laboratorium_id WHERE pasien_id='.$id.' ORDER BY laboratorium.id DESC')->result_array();
+		$data['lab_list'] = $this->db->query('SELECT pasien_laboratorium.*, laboratorium.jenis_lab FROM pasien_laboratorium LEFT JOIN laboratorium ON laboratorium.id=pasien_laboratorium.laboratorium_id WHERE pasien_id='.$id.' ORDER BY laboratorium.id DESC')->result_array();
+		$data['echo_list'] = $this->db->query('SELECT * FROM pasien_echo WHERE pasien_id='.$id.' ORDER BY id DESC')->result_array();
 
 		//lab data
 		$data['master_lab'] = $this->db->query('SELECT * FROM laboratorium ORDER BY jenis_lab ASC')->result_array();
@@ -128,6 +129,10 @@ class Pasien extends MY_Controller {
 		}
 		$nama = $data['pasien']['nama'];
 
+		$this->db->query('DELETE FROM pasien_riwayat WHERE pasien_id='.$id);
+		$this->db->query('DELETE FROM pasien_laboratorium WHERE pasien_id='.$id);
+		$this->db->query('DELETE FROM pasien_echo WHERE pasien_id='.$id);
+		$this->db->query('DELETE FROM pasien_obat WHERE pasien_id='.$id);
 		$this->db->query('DELETE FROM pasien WHERE id='.$id);
 
 		$this->session->set_flashdata('success_msg', 'Sukses menghapus data pasien: '.$nama.'.');
