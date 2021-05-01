@@ -17,6 +17,19 @@ class Pasien extends MY_Controller {
 		$this->load->view('layouts/footer');
 	}
 
+	public function history($id){
+		//validasi
+		$data['pasien'] = $this->db->query('SELECT * FROM pasien WHERE id='.$id)->row_array();
+		if($data['pasien'] == null){
+			$this->session->set_flashdata('error_msg', 'Pasien tidak ditemukan.');
+			redirect(site_url('/pasien'));
+		}
+
+		$this->load->view('layouts/header', $data);
+		$this->load->view('pasien_history.php');
+		$this->load->view('layouts/footer');
+	}
+
 	public function add(){
 		$data['menu_pasien'] = true;
 

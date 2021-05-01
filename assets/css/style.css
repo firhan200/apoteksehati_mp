@@ -1,5 +1,6 @@
 .box{
-    border:1px solid #bdbdbd;
+    border:1px solid #f0f0f0;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding:10px;
 }
 
@@ -13,4 +14,23 @@
 
 footer{
     height:100px;
+}
+
+.show_data{
+    margin-bottom:10px;
+}
+
+.show_data > .key{
+    font-size:10pt;
+    color:#838383;
+}
+
+.show_data > .value{
+    font-size:12pt;
+    color:#1c1c1c;
+}
+
+.help{
+    color:#838383;
+    font-weight: 100;
 }

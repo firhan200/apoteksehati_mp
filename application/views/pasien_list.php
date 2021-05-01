@@ -38,7 +38,7 @@ if(count($pasien_list) > 0){
                 echo '<td>'.$pasien['faktor_resiko_cad'].'</td>';
                 ?>
                 <td>
-                    <a href="#" class="btn btn-primary btn-sm">Riwayat</a>
+                    <a href="<?php echo site_url('/pasien/history/'.$pasien['id']); ?>" class="btn btn-primary btn-sm">Riwayat</a>
                     <a href="<?php echo site_url('/pasien/edit/'.$pasien['id']); ?>" class="btn btn-light btn-sm">Ubah</a>
                     <a href="<?php echo site_url('/pasien/delete/'.$pasien['id']); ?>" onclick="return confirm('Hapus <?php echo htmlspecialchars($pasien['nama']); ?> beserta seluruh riwayat nya?')" class="btn btn-danger btn-sm">Hapus</a>
                 </td>
