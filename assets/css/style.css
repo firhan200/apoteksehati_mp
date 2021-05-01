@@ -34,3 +34,7 @@ footer{
     color:#838383;
     font-weight: 100;
 }
+
+.datepicker-container{
+    z-index:3000 !important;
+}

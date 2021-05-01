@@ -25,6 +25,13 @@ class Pasien extends MY_Controller {
 			redirect(site_url('/pasien'));
 		}
 
+		//get riwayat
+		$data['riwayat_list'] = $this->db->query('SELECT * FROM pasien_riwayat WHERE pasien_id='.$id.' ORDER BY id DESC')->result_array();
+		$data['lab_list'] = $this->db->query('SELECT * FROM pasien_laboratorium LEFT JOIN laboratorium ON laboratorium.id=pasien_laboratorium.laboratorium_id WHERE pasien_id='.$id.' ORDER BY laboratorium.id DESC')->result_array();
+
+		//lab data
+		$data['master_lab'] = $this->db->query('SELECT * FROM laboratorium ORDER BY jenis_lab ASC')->result_array();
+
 		$this->load->view('layouts/header', $data);
 		$this->load->view('pasien_history.php');
 		$this->load->view('layouts/footer');
