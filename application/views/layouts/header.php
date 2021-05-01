@@ -9,6 +9,7 @@
 		<link href="<?php echo base_url('assets/css/style.css'); ?>" rel="stylesheet">
 		<link href="<?php echo base_url('assets/datepicker/datepicker.min.css'); ?>" rel="stylesheet">
 		<link href="//cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 	</head>
 	<body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
