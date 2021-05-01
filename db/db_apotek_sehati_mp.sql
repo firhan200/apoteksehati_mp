@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2021 at 03:03 PM
+-- Generation Time: May 01, 2021 at 04:58 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -188,7 +188,11 @@ CREATE TABLE `pasien` (
 --
 
 INSERT INTO `pasien` (`id`, `nama`, `no_rm`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `faktor_resiko_cad`) VALUES
-(7, 'John Doe', 'RM-0001', 0, '08-04-1988', 'Cirebon Kota', 'Hipertensi');
+(8, 'John Doe', 'RM-0001', 0, '10-07-1997', 'Cirebon Kota', 'Hipertensi'),
+(9, 'Lucy Ceil', 'RM-0008', 1, '05-01-2000', 'Majalengka Barat', 'Family History'),
+(10, 'Sheila Mary', 'RM-0009', 1, '04-10-1994', 'Cirebon Kabupaten', 'Dislipidemia'),
+(11, 'Ken Dock', 'RM-0010', 0, '06-11-1986', 'Kuningan', 'Merokok'),
+(12, 'Alex', 'RM-0011', 0, '10-03-1995', 'Indramayu Barat', 'DM');
 
 -- --------------------------------------------------------
 
@@ -214,7 +218,7 @@ CREATE TABLE `pasien_echo` (
 --
 
 INSERT INTO `pasien_echo` (`id`, `pasien_id`, `tanggal_echo`, `EF`, `EA`, `TAPSE`, `masalah_katup`, `hipertensi_plumonal`, `created_at`, `updated_at`) VALUES
-(3, 7, '01-05-2021', '25', '>1', '0.23', '', 'YA', '2021-05-01 19:55:59', '2021-05-01 19:55:59');
+(4, 8, '01-05-2021', '25', '>1', '0.23', 'lancar', 'YA', '2021-05-01 20:40:55', '2021-05-01 20:40:55');
 
 -- --------------------------------------------------------
 
@@ -237,8 +241,8 @@ CREATE TABLE `pasien_laboratorium` (
 --
 
 INSERT INTO `pasien_laboratorium` (`id`, `pasien_id`, `laboratorium_id`, `hasil_lab`, `tanggal_lab`, `created_at`, `updated_at`) VALUES
-(5, 7, 5, '', '01-05-2021', '2021-05-01 19:55:39', '2021-05-01 19:55:39'),
-(6, 7, 4, '', '01-05-2021', '2021-05-01 19:55:46', '2021-05-01 19:55:46');
+(7, 8, 5, '', '30-04-2021', '2021-05-01 20:40:39', '2021-05-01 20:40:39'),
+(8, 8, 1, 'Baik', '01-05-2021', '2021-05-01 20:40:45', '2021-05-01 20:40:45');
 
 -- --------------------------------------------------------
 
@@ -254,6 +258,14 @@ CREATE TABLE `pasien_obat` (
   `created_at` varchar(50) NOT NULL,
   `updated_at` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pasien_obat`
+--
+
+INSERT INTO `pasien_obat` (`id`, `pasien_id`, `dosis_obat_id`, `tanggal_diberikan`, `created_at`, `updated_at`) VALUES
+(3, 8, 5, '01-05-2021', '2021-05-01 20:41:03', '2021-05-01 20:41:03'),
+(4, 8, 46, '01-05-2021', '2021-05-01 20:41:13', '2021-05-01 20:41:13');
 
 -- --------------------------------------------------------
 
@@ -273,7 +285,9 @@ CREATE TABLE `pasien_riwayat` (
 --
 
 INSERT INTO `pasien_riwayat` (`id`, `pasien_id`, `tanggal_masuk`, `alasan_dirawat`) VALUES
-(8, 7, '01-05-2021', 'Sakit Kepala');
+(9, 8, '01-05-2021', 'Sakit Kepala'),
+(10, 9, '25-04-2021', 'Mual Mual'),
+(11, 8, '26-04-2021', 'badan demam & sesak nafas');
 
 -- --------------------------------------------------------
 
@@ -394,31 +408,31 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `pasien_echo`
 --
 ALTER TABLE `pasien_echo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pasien_laboratorium`
 --
 ALTER TABLE `pasien_laboratorium`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `pasien_obat`
 --
 ALTER TABLE `pasien_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pasien_riwayat`
 --
 ALTER TABLE `pasien_riwayat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
