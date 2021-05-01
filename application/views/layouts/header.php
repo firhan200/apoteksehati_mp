@@ -39,8 +39,6 @@
 							<?php echo $this->session->userdata('nama_user_apt'); ?>
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="#">Profil</a></li>
-							<li><hr class="dropdown-divider"></li>
 							<li><a class="dropdown-item" href="<?php echo site_url('/user/logout'); ?>">Keluar</a></li>
 						</ul>
 					</li>
