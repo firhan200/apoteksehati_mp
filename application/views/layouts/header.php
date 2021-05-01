@@ -26,6 +26,9 @@
 						<a class="nav-link <?php if(isset($menu_obat)){ echo 'active'; } ?>"" aria-current="page" href="<?php echo site_url('/kategori_obat'); ?>">Master Obat</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link <?php if(isset($menu_lab)){ echo 'active'; } ?>"" aria-current="page" href="<?php echo site_url('/laboratorium'); ?>">Master Laboratorium</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link <?php if(isset($menu_pasien)){ echo 'active'; } ?>"" aria-current="page" href="<?php echo site_url('/pasien'); ?>">Pasien</a>
 					</li>
 				</ul>
