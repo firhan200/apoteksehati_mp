@@ -37,7 +37,7 @@ if(count($pasien_list) > 0){
 
                 }
                 echo '<td>'.$pasien['no_rm'].'</td>';
-                echo '<td><a href="'.site_url('/pasien/riwayat/'.$pasien['id']).'">'.$pasien['nama'].'</a></td>';
+                echo '<td><a href="'.site_url('/pasien/history/'.$pasien['id']).'">'.$pasien['nama'].'</a></td>';
                 echo '<td>'.$age.' Tahun</td>';
                 echo '<td>'.($pasien['jenis_kelamin']==LAKI_LAKI ? 'Laki-laki' : 'Perempuan').'</td>';
                 echo '<td>'.$pasien['faktor_resiko_cad'].'</td>';
