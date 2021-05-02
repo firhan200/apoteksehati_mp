@@ -58,20 +58,13 @@ class Pasien extends MY_Controller {
 	}
 
 	public function add_process(){
+		$no_rm = $this->input->post('no_rm');
 		$nama = $this->input->post('nama');
 		$jenis_kelamin = $this->input->post('jenis_kelamin');
 		$tanggal_lahir = $this->input->post('tanggal_lahir');
 		$alamat = $this->input->post('alamat');
 		$faktor_resiko_cad = $this->input->post('faktor_resiko_cad');
 		$ekg = $this->input->post('ekg');
-
-		//generate no RM
-		$last_pasien = $this->db->query('SELECT id FROM pasien ORDER BY id DESC LIMIT 1')->row_array();
-		$rm_num = str_pad(1, 4, '0', STR_PAD_LEFT);
-		if($last_pasien != null){
-			$rm_num = str_pad($last_pasien['id'], 4, '0', STR_PAD_LEFT);
-		}
-		$no_rm = 'RM-'.$rm_num;
 
 		//insert
 		$this->db->insert('pasien', array(
@@ -112,6 +105,7 @@ class Pasien extends MY_Controller {
 			redirect(site_url('/pasien'));
 		}
 
+		$no_rm = $this->input->post('no_rm');
 		$nama = $this->input->post('nama');
 		$jenis_kelamin = $this->input->post('jenis_kelamin');
 		$tanggal_lahir = $this->input->post('tanggal_lahir');
@@ -122,6 +116,7 @@ class Pasien extends MY_Controller {
 		//insert
 		$this->db->where('id', $id);
 		$this->db->update('pasien', array(
+			'no_rm' => $no_rm,
 			'nama' => $nama,
 			'jenis_kelamin' => $jenis_kelamin,
 			'tanggal_lahir' => $tanggal_lahir,

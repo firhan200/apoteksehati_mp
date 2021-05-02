@@ -2,6 +2,10 @@
     <div class="row">
         <div class="col-sm-12 col-md-6">
             <div class="form-group">
+                <label class="form-label">No. RM</label>
+                <input type="text" name="no_rm" value="<?php echo $pasien['no_rm']; ?>" class="form-control" maxlength="150" placeholder="Nomor RM" required/>
+            </div>
+            <div class="form-group">
                 <label class="form-label">Nama Pasien</label>
                 <input type="text" name="nama" value="<?php echo $pasien['nama']; ?>" class="form-control" maxlength="150" placeholder="Masukan Nama Pasien.." required/>
             </div>
