@@ -1,6 +1,6 @@
 <?php if($pasien['tanggal_meninggal'] != null && $pasien['tanggal_meninggal'] != ""){ ?>
 <div class="alert alert-danger">
-    Pasien Telah Meninggal
+    Pasien Telah Meninggal : <b><?php echo $pasien['tanggal_meninggal']; ?></b>
 </div>
 <?php } ?>
 <div class="text-end">
