@@ -75,6 +75,7 @@ class User extends MY_Controller {
 		$data['umur_list'] = $umur_list;
 
 		$data['riwayat_pasien_list'] = $this->db->query('SELECT * FROM pasien_riwayat pr LEFT JOIN pasien p ON p.id=pr.pasien_id ORDER BY pr.id DESC LIMIT 5')->result_array();
+		$data['total_cad'] = $this->db->query('SELECT *, (SELECT COUNT(*) FROM pasien_cad WHERE faktor_resiko_cad=pa.faktor_resiko_cad) AS total FROM pasien_cad pa GROUP BY faktor_resiko_cad')->result_array();
 
 		$this->load->view('layouts/header', $data);
 		$this->load->view('dashboard_page.php');

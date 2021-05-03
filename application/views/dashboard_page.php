@@ -71,7 +71,7 @@
 </div>
 <br/>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-md-6">
         <div class="box">
             <div class="chart-title">
                 Riwayat Pasien Terakhir
@@ -99,6 +99,62 @@
                 }?>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6">
+        <div class="box">
+            <div class="chart-title">
+                Faktor Resiko CAD
+            </div>
+            <div id="chart_cad"></div>
+            <script>
+            var dataList = [];
+            var labelList = [];
+            <?php
+            foreach($total_cad as $cad){
+            ?>
+            dataList.push(<?php echo $cad['total']; ?>);
+            labelList.push('<?php echo $cad['faktor_resiko_cad']; ?>');
+            <?php
+            }
+            ?>
+            var options = {
+                chart: {
+                    height: 320,
+                    type: 'bar',
+                },
+                series: [{
+                    name: 'Jumlah',
+                    data: dataList
+                }],
+                xaxis:{
+                    categories: labelList
+                },
+                yaxis: {
+                    labels: {
+                        formatter: function (value) {
+                        return value + " Orang";
+                        }
+                    },
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return Math.round((val / <?php echo $total_pasien; ?>) * 100) + "%";
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+            }
+
+            var chart = new ApexCharts(document.querySelector("#chart_cad"), options);
+
+            chart.render();
+            </script>
         </div>
     </div>
 </div>

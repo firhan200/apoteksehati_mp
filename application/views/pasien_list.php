@@ -13,7 +13,6 @@ if(count($pasien_list) > 0){
                 <th>Nama Pasien</th>
                 <th>Umur</th>
                 <th>Jenis Kelamin</th>
-                <th>Faktor Resiko CAD</th>
                 <th></th>
             </tr>
         </thead>
@@ -40,7 +39,6 @@ if(count($pasien_list) > 0){
                 echo '<td><a href="'.site_url('/pasien/history/'.$pasien['id']).'">'.$pasien['nama'].'</a></td>';
                 echo '<td>'.$age.' Tahun</td>';
                 echo '<td>'.($pasien['jenis_kelamin']==LAKI_LAKI ? 'Laki-laki' : 'Perempuan').'</td>';
-                echo '<td>'.$pasien['faktor_resiko_cad'].'</td>';
                 ?>
                 <td>
                     <a href="<?php echo site_url('/pasien/history/'.$pasien['id']); ?>" class="btn btn-primary btn-sm">Riwayat</a>

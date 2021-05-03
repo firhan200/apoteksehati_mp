@@ -76,7 +76,14 @@
                     Faktor Resiko CAD
                 </div>
                 <div class="value">
-                    <?php echo $pasien['faktor_resiko_cad']; ?>
+                    <?php
+                    foreach($cads as $index => $cad){
+                        echo $cad['faktor_resiko_cad'];
+                        if($index < (count($cads) - 1)){
+                            echo ', ';
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>

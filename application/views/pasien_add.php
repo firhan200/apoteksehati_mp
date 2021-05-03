@@ -44,13 +44,36 @@
             </div>
             <div class="form-group">
                 <label class="form-label">Faktor Resiko CAD</label>
-                <select class="form-control" name="faktor_resiko_cad">
-                    <option value="<?php echo CAD_HIPERTENSI ?>">Hipertensi</option>
-                    <option value="<?php echo CAD_DM ?>">DM</option>
-                    <option value="<?php echo CAD_MEROKOK ?>">Merokok</option>
-                    <option value="<?php echo CAD_DISLIPIDEMIA ?>">Dislipidemia</option>
-                    <option value="<?php echo CAD_FAMILY_HISTORY ?>">Family History</option>
-                </select>
+                <div class="form-check">
+                    <input class="form-check-input" name="cad[]" type="checkbox" value="<?php echo CAD_HIPERTENSI ?>" id="check_<?php echo CAD_HIPERTENSI ?>">
+                    <label class="form-check-label" for="check_<?php echo CAD_HIPERTENSI ?>">
+                        <?php echo CAD_HIPERTENSI ?>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="cad[]" type="checkbox" value="<?php echo CAD_DM ?>" id="check_<?php echo CAD_DM ?>">
+                    <label class="form-check-label" for="check_<?php echo CAD_DM ?>">
+                        <?php echo CAD_DM ?>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="cad[]" type="checkbox" value="<?php echo CAD_MEROKOK ?>" id="check_<?php echo CAD_MEROKOK ?>">
+                    <label class="form-check-label" for="check_<?php echo CAD_MEROKOK ?>">
+                        <?php echo CAD_MEROKOK ?>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="cad[]" type="checkbox" value="<?php echo CAD_DISLIPIDEMIA ?>" id="check_<?php echo CAD_DISLIPIDEMIA ?>">
+                    <label class="form-check-label" for="check_<?php echo CAD_DISLIPIDEMIA ?>">
+                        <?php echo CAD_DISLIPIDEMIA ?>
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" name="cad[]" type="checkbox" value="<?php echo CAD_FAMILY_HISTORY ?>" id="check_<?php echo CAD_FAMILY_HISTORY ?>">
+                    <label class="form-check-label" for="check_<?php echo CAD_FAMILY_HISTORY ?>">
+                        <?php echo CAD_FAMILY_HISTORY ?>
+                    </label>
+                </div>
             </div>
             <div class="form-group">
                 <label class="form-label">EKG</label>

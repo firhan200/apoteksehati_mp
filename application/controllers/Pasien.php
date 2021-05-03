@@ -28,6 +28,7 @@ class Pasien extends MY_Controller {
 		$data['menu_pasien'] = true;
 
 		//get riwayat
+		$data['cads'] = $this->db->query('SELECT * FROM pasien_cad WHERE pasien_id='.$id)->result_array();
 		$data['riwayat_list'] = $this->db->query('SELECT * FROM pasien_riwayat WHERE pasien_id='.$id.' ORDER BY id DESC')->result_array();
 		$data['lab_list'] = $this->db->query('SELECT pasien_laboratorium.*, laboratorium.jenis_lab FROM pasien_laboratorium LEFT JOIN laboratorium ON laboratorium.id=pasien_laboratorium.laboratorium_id WHERE pasien_id='.$id.' ORDER BY laboratorium.id DESC')->result_array();
 		$data['echo_list'] = $this->db->query('SELECT * FROM pasien_echo WHERE pasien_id='.$id.' ORDER BY id DESC')->result_array();
@@ -73,9 +74,20 @@ class Pasien extends MY_Controller {
 			'jenis_kelamin' => $jenis_kelamin,
 			'tanggal_lahir' => $tanggal_lahir,
 			'alamat' => $alamat,
-			'faktor_resiko_cad' => $faktor_resiko_cad,
 			'ekg' => $ekg
 		));
+
+		//get last insert
+		$pasien_id = $this->db->insert_id();
+
+		//insert faktor resiko cad
+		$cads = $this->input->post('cad');
+		foreach($cads as $cad){
+			$this->db->insert('pasien_cad', array(
+				'pasien_id' => $pasien_id,
+				'faktor_resiko_cad' => $cad
+			));
+		}
 
 		$this->session->set_flashdata('success_msg', 'Sukses menambahkan data pasien.');
 
@@ -91,6 +103,32 @@ class Pasien extends MY_Controller {
 		}
 
 		$data['menu_pasien'] = true;
+
+		//cek cad
+		$data['hipertensi'] = false;
+		$data['dm'] = false;
+		$data['merokok'] = false;
+		$data['dislipidemia'] = false;
+		$data['family_history'] = false;
+
+		$cads = $this->db->query('SELECT * FROM pasien_cad WHERE pasien_id='.$id)->result_array();
+		foreach($cads as $cad){
+			if($cad['faktor_resiko_cad']==CAD_HIPERTENSI){
+				$data['hipertensi'] = true;
+			}
+			if($cad['faktor_resiko_cad']==CAD_DM){
+				$data['dm'] = true;
+			}
+			if($cad['faktor_resiko_cad']==CAD_MEROKOK){
+				$data['merokok'] = true;
+			}
+			if($cad['faktor_resiko_cad']==CAD_DISLIPIDEMIA){
+				$data['dislipidemia'] = true;
+			}
+			if($cad['faktor_resiko_cad']==CAD_FAMILY_HISTORY){
+				$data['family_history'] = true;
+			}
+		}
 
 		$this->load->view('layouts/header', $data);
 		$this->load->view('pasien_edit.php', $data);
@@ -110,7 +148,6 @@ class Pasien extends MY_Controller {
 		$jenis_kelamin = $this->input->post('jenis_kelamin');
 		$tanggal_lahir = $this->input->post('tanggal_lahir');
 		$alamat = $this->input->post('alamat');
-		$faktor_resiko_cad = $this->input->post('faktor_resiko_cad');
 		$ekg = $this->input->post('ekg');
 
 		//insert
@@ -121,9 +158,19 @@ class Pasien extends MY_Controller {
 			'jenis_kelamin' => $jenis_kelamin,
 			'tanggal_lahir' => $tanggal_lahir,
 			'alamat' => $alamat,
-			'faktor_resiko_cad' => $faktor_resiko_cad,
 			'ekg' => $ekg
 		));
+
+		//delete cad
+		$this->db->query('DELETE FROM pasien_cad WHERE pasien_id='.$id);
+		//insert faktor resiko cad
+		$cads = $this->input->post('cad');
+		foreach($cads as $cad){
+			$this->db->insert('pasien_cad', array(
+				'pasien_id' => $id,
+				'faktor_resiko_cad' => $cad
+			));
+		}
 
 		$this->session->set_flashdata('success_msg', 'Sukses mengubah data pasien: '.$data['pasien']['nama'].'.');
 
