@@ -198,6 +198,7 @@ class Pasien extends MY_Controller {
 		$this->db->query('DELETE FROM pasien_laboratorium WHERE pasien_id='.$id);
 		$this->db->query('DELETE FROM pasien_echo WHERE pasien_id='.$id);
 		$this->db->query('DELETE FROM pasien_obat WHERE pasien_id='.$id);
+		$this->db->query('DELETE FROM pasien_cad WHERE pasien_id='.$id);
 		$this->db->query('DELETE FROM pasien WHERE id='.$id);
 
 		$this->session->set_flashdata('success_msg', 'Sukses menghapus data pasien: '.$nama.'.');
