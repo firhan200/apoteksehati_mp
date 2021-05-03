@@ -332,7 +332,11 @@ class Riwayat extends MY_Controller {
 		$sheet->setCellValue('B7', $pasien['alamat']);
 
 		$sheet->setCellValue('A9', 'FAKTOR RESIKO CAD');
-		$sheet->setCellValue('B9', $pasien['faktor_resiko_cad']);
+		$cads = $this->db->query('SELECT * FROM pasien_cad WHERE pasien_id='.$pasien_id)->result_array();
+		foreach($cads as $index => $cad){
+			$cadCol = chr(substr("000".(($index + 1)+65),-3));
+			$sheet->setCellValue($cadCol.'9', $cad['faktor_resiko_cad']);
+		}
 
 		$sheet->setCellValue('A11', 'EKG');
 		$sheet->setCellValue('B11', $pasien['ekg']);
