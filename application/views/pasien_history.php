@@ -107,6 +107,26 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-6 col-md-2">
+            <div class="show_data">
+                <div class="key">
+                    Diagnosis Utama
+                </div>
+                <div class="value">
+                    <?php echo $pasien['diagnosis_utama']; ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-2">
+            <div class="show_data">
+                <div class="key">
+                    Diagnosis Tambahan
+                </div>
+                <div class="value">
+                    <?php echo $pasien['diagnosis_tambahan']; ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

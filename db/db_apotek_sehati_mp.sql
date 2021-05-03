@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2021 at 08:00 PM
+-- Generation Time: May 03, 2021 at 06:33 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.10
 
@@ -180,22 +180,60 @@ CREATE TABLE `pasien` (
   `jenis_kelamin` smallint(1) NOT NULL COMMENT '0 = Pria, 1 = Wanita',
   `tanggal_lahir` varchar(50) NOT NULL,
   `alamat` varchar(255) NOT NULL,
-  `faktor_resiko_cad` varchar(255) NOT NULL,
   `ekg` varchar(50) NOT NULL,
-  `tanggal_meninggal` varchar(50) NOT NULL
+  `tanggal_meninggal` varchar(50) NOT NULL,
+  `diagnosis_utama` text NOT NULL,
+  `diagnosis_tambahan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pasien`
 --
 
-INSERT INTO `pasien` (`id`, `nama`, `no_rm`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `faktor_resiko_cad`, `ekg`, `tanggal_meninggal`) VALUES
-(8, 'John Doe', 'RM-0001', 0, '10-07-1997', 'Cirebon Kota', 'Hipertensi', '', ''),
-(9, 'Lucy Ceil', 'RM-0008', 1, '05-01-2000', 'Majalengka Barat', 'Family History', '', ''),
-(10, 'Sheila Mary', 'RM-0009', 1, '04-10-1994', 'Cirebon Kabupaten', 'Dislipidemia', '', ''),
-(11, 'Ken Dock', 'RM-0010', 0, '06-11-1986', 'Kuningan', 'Merokok', '', ''),
-(12, 'Alex', 'RM-0011', 0, '10-03-1995', 'Indramayu Barat', 'DM', '', ''),
-(14, 'Test Pasien', 'RM-0012', 0, '02-03-1988', 'Cirebon Kota', 'Hipertensi', 'AF/FLUTTER', '03-05-2021');
+INSERT INTO `pasien` (`id`, `nama`, `no_rm`, `jenis_kelamin`, `tanggal_lahir`, `alamat`, `ekg`, `tanggal_meninggal`, `diagnosis_utama`, `diagnosis_tambahan`) VALUES
+(8, 'John Doe', 'RM-0001', 0, '10-07-1997', 'Cirebon Kota', 'SINUS', '', '', ''),
+(9, 'Lucy Ceil', 'RM-0008', 1, '05-01-2000', 'Cirebon Kota', 'SINUS', '', '', ''),
+(10, 'Sheila Mary', 'RM-0009', 1, '04-10-1994', 'Cirebon Kabupaten', '', '', '', ''),
+(11, 'Ken Dock', 'RM-0010', 0, '06-11-1986', 'Kuningan', 'SINUS', '', '', ''),
+(12, 'Alex', 'RM-0011', 0, '10-03-1995', 'Cirebon Kota', 'SINUS', '', '', ''),
+(16, 'Test Pasien', 'RM020302', 0, '29-04-2021', 'Cirebon Kota', 'AF/FLUTTER', '', 'utama 2', 'tambahan 212\r\n'),
+(17, 'Pasien 1', '1', 0, '26-04-2021', 'Cirebon Kota', 'SINUS', '', '', ''),
+(18, 'Pasien 2', '2', 0, '27-04-2021', 'Cirebon Kota', 'SINUS', '', '', ''),
+(19, 'Pasien 3', '3', 0, '26-04-2021', 'Cirebon Kota', 'SINUS', '', '', ''),
+(20, 'Pasien 4', '4', 0, '28-04-2021', 'Cirebon Kota', 'SINUS', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pasien_cad`
+--
+
+CREATE TABLE `pasien_cad` (
+  `int` int(11) NOT NULL,
+  `pasien_id` int(11) NOT NULL,
+  `faktor_resiko_cad` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pasien_cad`
+--
+
+INSERT INTO `pasien_cad` (`int`, `pasien_id`, `faktor_resiko_cad`) VALUES
+(11, 11, 'Family History'),
+(12, 8, 'Hipertensi'),
+(13, 8, 'Family History'),
+(14, 9, 'DM'),
+(15, 9, 'Family History'),
+(19, 17, 'Family History'),
+(20, 18, 'Family History'),
+(21, 19, 'Family History'),
+(23, 20, 'Family History'),
+(24, 12, 'Merokok'),
+(25, 12, 'Dislipidemia'),
+(26, 12, 'Family History'),
+(30, 16, 'DM'),
+(31, 16, 'Dislipidemia'),
+(32, 16, 'Family History');
 
 -- --------------------------------------------------------
 
@@ -268,7 +306,10 @@ CREATE TABLE `pasien_obat` (
 
 INSERT INTO `pasien_obat` (`id`, `pasien_id`, `dosis_obat_id`, `tanggal_diberikan`, `created_at`, `updated_at`) VALUES
 (3, 8, 5, '01-05-2021', '2021-05-01 20:41:03', '2021-05-01 20:41:03'),
-(4, 8, 46, '01-05-2021', '2021-05-01 20:41:13', '2021-05-01 20:41:13');
+(4, 8, 46, '01-05-2021', '2021-05-01 20:41:13', '2021-05-01 20:41:13'),
+(7, 16, 14, '02-05-2021', '2021-05-03 11:17:03', '2021-05-03 11:17:03'),
+(8, 16, 13, '29-04-2021', '2021-05-03 11:17:10', '2021-05-03 11:17:10'),
+(9, 12, 14, '30-04-2021', '2021-05-03 11:17:24', '2021-05-03 11:17:24');
 
 -- --------------------------------------------------------
 
@@ -350,6 +391,12 @@ ALTER TABLE `pasien`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pasien_cad`
+--
+ALTER TABLE `pasien_cad`
+  ADD PRIMARY KEY (`int`);
+
+--
 -- Indexes for table `pasien_echo`
 --
 ALTER TABLE `pasien_echo`
@@ -411,7 +458,13 @@ ALTER TABLE `obat`
 -- AUTO_INCREMENT for table `pasien`
 --
 ALTER TABLE `pasien`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `pasien_cad`
+--
+ALTER TABLE `pasien_cad`
+  MODIFY `int` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `pasien_echo`
@@ -429,7 +482,7 @@ ALTER TABLE `pasien_laboratorium`
 -- AUTO_INCREMENT for table `pasien_obat`
 --
 ALTER TABLE `pasien_obat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pasien_riwayat`

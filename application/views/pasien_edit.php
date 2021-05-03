@@ -82,6 +82,14 @@
                     <option value="<?php echo EKG_AF_FLUTTER ?>" <?php echo $pasien['ekg']==EKG_AF_FLUTTER ? 'selected' : '' ?>><?php echo EKG_AF_FLUTTER; ?></option>
                 </select>
             </div>
+            <div class="form-group">
+                <label class="form-label">Diagnosis Utama</label>
+                <textarea class="form-control" name="diagnosis_utama"><?php echo $pasien['diagnosis_utama']; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Diagnosis Tambahan</label>
+                <textarea class="form-control" name="diagnosis_tambahan"><?php echo $pasien['diagnosis_tambahan']; ?></textarea>
+            </div>
         </div>
     </div>
     <div class="row">

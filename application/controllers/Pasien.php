@@ -66,6 +66,8 @@ class Pasien extends MY_Controller {
 		$alamat = $this->input->post('alamat');
 		$faktor_resiko_cad = $this->input->post('faktor_resiko_cad');
 		$ekg = $this->input->post('ekg');
+		$diagnosis_utama = $this->input->post('diagnosis_utama');
+		$diagnosis_tambahan = $this->input->post('diagnosis_tambahan');
 
 		//insert
 		$this->db->insert('pasien', array(
@@ -74,7 +76,9 @@ class Pasien extends MY_Controller {
 			'jenis_kelamin' => $jenis_kelamin,
 			'tanggal_lahir' => $tanggal_lahir,
 			'alamat' => $alamat,
-			'ekg' => $ekg
+			'ekg' => $ekg,
+			'diagnosis_utama' => $diagnosis_utama,
+			'diagnosis_tambahan' => $diagnosis_tambahan
 		));
 
 		//get last insert
@@ -149,6 +153,8 @@ class Pasien extends MY_Controller {
 		$tanggal_lahir = $this->input->post('tanggal_lahir');
 		$alamat = $this->input->post('alamat');
 		$ekg = $this->input->post('ekg');
+		$diagnosis_utama = $this->input->post('diagnosis_utama');
+		$diagnosis_tambahan = $this->input->post('diagnosis_tambahan');
 
 		//insert
 		$this->db->where('id', $id);
@@ -158,7 +164,9 @@ class Pasien extends MY_Controller {
 			'jenis_kelamin' => $jenis_kelamin,
 			'tanggal_lahir' => $tanggal_lahir,
 			'alamat' => $alamat,
-			'ekg' => $ekg
+			'ekg' => $ekg,
+			'diagnosis_utama' => $diagnosis_utama,
+			'diagnosis_tambahan' => $diagnosis_tambahan
 		));
 
 		//delete cad

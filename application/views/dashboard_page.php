@@ -158,3 +158,61 @@
         </div>
     </div>
 </div>
+<br/>
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="box">
+            <div class="chart-title">
+                Dosis Obat
+            </div>
+            <div id="dosis_obat"></div>
+            <script>
+            var dataList = [];
+            var labelList = [];
+            <?php
+            foreach($dosis_obat_list as $dosis_obat){
+            ?>
+            dataList.push(<?php echo $dosis_obat['total']; ?>);
+            labelList.push('<?php echo $dosis_obat['obat'].' - '.$dosis_obat['dosis']; ?>');
+            <?php
+            }
+            ?>
+            var options = {
+                chart: {
+                    height: 320,
+                    type: 'bar',
+                },
+                series: [{
+                    name: 'Jumlah',
+                    data: dataList
+                }],
+                xaxis:{
+                    categories: labelList
+                },
+                yaxis: {
+                    labels: {
+                        formatter: function (value) {
+                        return Math.round(value) + " Orang";
+                        }
+                    },
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function (val) {
+                        return Math.round((val / <?php echo $total_pasien; ?>) * 100) + "%";
+                    },
+                    offsetY: -20,
+                    style: {
+                        fontSize: '12px',
+                        colors: ["#304758"]
+                    }
+                },
+            }
+
+            var chart = new ApexCharts(document.querySelector("#dosis_obat"), options);
+
+            chart.render();
+            </script>
+        </div>
+    </div>
+</div>
